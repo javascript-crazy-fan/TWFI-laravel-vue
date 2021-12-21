@@ -48,7 +48,7 @@
                   :xprops="xprops"
                   :selection="selectedUsers"
                 />
-              
+
             </div>
           </div>
         </div>

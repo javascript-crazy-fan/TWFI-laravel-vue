@@ -44,11 +44,11 @@ import ProjectsReportTime from '../components/cruds/Projects/ReportTime.vue'
 import DashboardIndex from '../components/Dashboard/DashboardPage.vue'
 import DashboardCardShow from '../components/Dashboard/DashboardCardShow.vue'
 
-import TimeCenterIndex from '../components/TimeCenter/TimeCenterPage.vue'
-import TimeCenterCardShow from '../components/TimeCenter/TimeCenterCardShow.vue'
+// import TimeCenterIndex from '../components/TimeCenter/TimeCenterPage.vue'
+// import TimeCenterCardShow from '../components/TimeCenter/TimeCenterCardShow.vue'
 
 import PhotoPage from '../components/Photo/PhotoPage.vue'
-import TimecardPage from '../components/Timecard/TimecardPage.vue'
+// import TimecardPage from '../components/Timecard/TimecardPage.vue'
 
 Vue.use(VueRouter)
 
@@ -96,11 +96,11 @@ const routes = [
 	{ path: '/dashboard', component: DashboardIndex, name: 'dashboard.index' },
 	{ path: '/dashboard/:id', component: DashboardCardShow, name: 'dashboard.show' },
 
-	{ path: '/timecenter', component: TimeCenterIndex, name: 'timecenter.index' },
-	{ path: '/timecenter/:id', component: TimeCenterCardShow, name: 'timecenter.show' },
+	// { path: '/timecenter', component: TimeCenterIndex, name: 'timecenter.index' },
+	// { path: '/timecenter/:id', component: TimeCenterCardShow, name: 'timecenter.show' },
 
 	{ path: '/project-assign/photo', component: PhotoPage, name: 'project.photo.index' },
-	{ path: '/project-assign/timecard', component: TimecardPage, name: 'project.timecard.index' },
+	// { path: '/project-assign/timecard', component: TimecardPage, name: 'project.timecard.index' },
 ]
 
 export default new VueRouter({

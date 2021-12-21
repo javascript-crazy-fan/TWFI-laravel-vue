@@ -58,9 +58,9 @@
       <div slot="body">
         <div class="space-between">
           <div class="curtime main">{{ weekData.weekTime }}</div>
-          <button class="btn btn-default align-items-center">
+          <!-- <button class="btn btn-default align-items-center">
             <span class="icon-check-box"></span>Submit
-          </button>
+          </button> -->
         </div>
         <div class="table-wrapper mt-3">
           <table class="timecard-period-table">
@@ -670,8 +670,8 @@ export default {
         endDate: weekdays[1],
       });
       this.isModalVisible = true;
-    }, 
-    closeModal() {      
+    },
+    closeModal() {
       const weekdays = this.getWeekDate();
       this.fetchData({
         projectId: this.data.projectId,
@@ -683,7 +683,7 @@ export default {
         this.curWeek({
         userId: this.data.userId,
         projectId: this.data.projectId,
-      }); }, 100);      
+      }); }, 100);
     },
     showEntryModal(date) {
       this.entryDate = date;

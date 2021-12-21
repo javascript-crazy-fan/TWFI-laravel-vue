@@ -1,9 +1,14 @@
-
-.label {margin-right:5px;margin-bottom:5px !important;display:inline-block;} #wrapper {
+.label {
+  margin-right: 5px;
+  margin-bottom: 5px !important;
+  display: inline-block;
+}
+#wrapper {
   position: relative;
 }
 
-.main-sidebar, .left-side {
+.main-sidebar,
+.left-side {
   padding-top: 70px;
 }
 
@@ -24,7 +29,8 @@ body {
   overflow-y: hidden;
 }
 
-div[name='Datatable'] th, div[name='Datatable'] td {
+div[name='Datatable'] th,
+div[name='Datatable'] td {
   font-size: 13px;
   vertical-align: middle;
 }
@@ -33,9 +39,9 @@ div[name='Datatable'] div[name='HeaderSettings'] {
   z-index: 1;
 }
 
-div[name='Datatable'] div[name='HeaderSettings']>button {
-  padding: .25rem .5rem;
-  font-size: .875rem;
+div[name='Datatable'] div[name='HeaderSettings'] > button {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
   line-height: 1.5;
 }
 
@@ -65,19 +71,36 @@ div[name='Datatable'] .btn-xs {
 }
 
 /***Toggle button arrange in vertical line.***/
-.vue-js-switch .v-switch-label{
+.vue-js-switch .v-switch-label {
   /* position: static !important; */
   color: #000 !important;
 }
 
 .vue-js-switch .v-switch-label.v-left,
-.vue-js-switch .v-switch-label.v-right
-{
-  left: 70px !important
+.vue-js-switch .v-switch-label.v-right {
+  left: 70px !important;
   right: -60px !important;
   width: 150px !important;
 }
 
-.d-flex.flex-wrap{
+.d-flex.flex-wrap {
   margin-left: 15px;
+}
+
+@media (max-width: 767px) {
+  .main-header .logo {
+    display: none;
+  }
+  .sub-section .sub-content {
+    display: block !important;
+  }
+  .sub-section .sub-content .timecard-wrapper {
+    margin: 10px !important;
+  }
+  .content-wrapper .dashboard-page .cards-container {
+    display: block !important;
+  }
+  .content-wrapper .dashboard-page .cards-container .card-wrapper {
+    margin: 10px !important;
+  }
 }

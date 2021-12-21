@@ -21,13 +21,13 @@
               <bootstrap-alert />
 
               <div class="box-body row">
-                
+
                   <div class="form-group col-md-6">
                     <input
                       type="text"
                       class="form-control"
                       name="pic"
-                      placeholder="PIC"
+                      placeholder="PIC*"
                       required
                       :value="item.pic"
                       @input="updatePic"
@@ -40,13 +40,13 @@
                           type="text"
                           class="form-control"
                           name="phone"
-                          placeholder="Phone"
+                          placeholder="Phone Number*"
                           @input="updatePhone"
                           required
                           :value="item.phone"
                         />
                       </div>
-                      
+
                     </div>
                   </div>
                   <div class="form-group col-md-6">
@@ -54,7 +54,7 @@
                       type="text"
                       class="form-control"
                       name="sse"
-                      placeholder="SSE"
+                      placeholder="SSE*"
                       :value="item.sse"
                       @input="updateSse"
                     />
@@ -63,6 +63,7 @@
                     <v-select
                       name="mentor"
                       label="title"
+					  placeholder="Select User*"
                       class="form-control"
                       @input="updateMentor"
                       :value="
@@ -85,14 +86,14 @@
                   <div class="col-md-12">
                     <h3 class="main-heading">Job Steps</h3>
                   </div>
-                  
+
 
                   <div class="parent-div" v-for="(jobstep, indexNew) in item.jobsteps" v-bind:key="jobstep.indexNew">
                     <div class="col-md-10">
                       <h4 class="sub-heading">Job steps #{{ jinc = indexNew+1}}</h4>
                     </div>
-                    <div class="main-div"> 
-                      <div class="job-step"> 
+                    <div class="main-div">
+                      <div class="job-step">
                         <div class="col-md-6">
                           <input
                             type="text"
@@ -117,7 +118,7 @@
 
                       </div>
                       <a @click="deleteSection(indexNew)" class="delete-btn"><i class="fa fa-trash"></i></a>
-                    </div> 
+                    </div>
 
                     <div class="haz-con">
                       <h5 style="clear:both;">Hazards and Controls</h5>
@@ -147,7 +148,7 @@
                         <div class="col-md-2"><a @click="deleteAddition({'jbid': indexNew, 'adid':additional.uid})" class="delete-btn"><i class="fa fa-trash"></i></a></div> 
                       </div>
 
-                      
+
                     </div>
                     <a class="btn btn-dark mt-2 mb-2" @click="addNewItem(indexNew)" style="margin-left:15px">
                       New Item
@@ -155,7 +156,7 @@
 
                   </div>
 
-                  
+
                   <div class="col-md-12">
                     <a class="btn btn-secondary mt-2 mb-2" @click="addNewSection">
                       New Section
@@ -193,12 +194,12 @@
                       :value="item.attachments"
                       @input="updateAttachments"
                     />
-                  </div>  
+                  </div>
                   <div class="col-md-12">
                     <h3 class="main-heading">Signatures</h3>
                   </div>
                   <div class="col-md-12 signature-col" v-for="(sign, index) in item.signs" v-bind:key="sign.uid">
-                    
+
                     <div class="row">
                         <div class="col-md-3"></div>
                         <div class="col-md-5">
@@ -212,7 +213,7 @@
 
                           <input type="text" class="form-control" placeholder="Type Name" :value="sign.type_name" style="margin-bottom:10px;" @input="updateTypename" :data-index="index">
                           <div class="btn-group-cstm">
-                            
+
                             <a class="btn btn-secondary" @click="save(index)">Save</a>
                             <a class="btn btn-default ml-2" @click="undo(index)">Undo</a>
                             <input type="hidden" :id="'sign-pic-'+index" name="sign_pic[]" v-model="sign.signature"> 
@@ -224,7 +225,7 @@
                       <div class="col-md-3"></div>
 
                     </div>
-                    
+
                   </div>
 
                   <div class="col-md-12">
@@ -232,21 +233,15 @@
                       New Sign
                     </a>
                   </div>
-                  
-                  <div class="box-body col-md-6">                  
+
+                  <div class="box-body col-md-6">
                     <button type="submit" class="btn btn-primary btn-sm ml-auto" :isLoading="loading" :disabled="loading" @click="handleShowMap"
                     >
                     <span v-if="isCreate">Create Project</span>
                     <span v-else>Save</span>
                     </button>
                   </div>
-
-                
-                
               </div>
-
-              
-
             </div>
           </form>
         </div>
@@ -285,6 +280,12 @@ export default {
     }
     this.fetchusersAll()
   },
+  updated(){
+	$('.v-select input').prop('required', true)
+	if ($('.selected-tag').length > 0){
+		$('.v-select input').prop('required', false)
+	}
+  },
   methods: {
     ...mapMutations('ProjectsSafetySingle',['addNewSection','addNewItem', 'addNewSign', 'deleteSection', 'deleteSignature', 'deleteAddition']),
     ...mapActions('ProjectsSafetySingle', [
@@ -306,7 +307,7 @@ export default {
       'setTypename',
       // 'setFormID',
       'fetchData',
-      'fetchusersAll'  
+      'fetchusersAll'
     ]),
     updatePic(e) {
       this.setPic(e.target.value)
@@ -345,7 +346,6 @@ export default {
     updateTypename(e){
       this.setTypename({'data': e.target.value, 'id': e.target.dataset.index})
     },
-    
     updateForm() {
         // this.setFormID(this.$route.params.id);
         this.updateData()
@@ -367,9 +367,6 @@ export default {
         return true;
       }
     },
-    
-    
-   
     undo(id) {
       this.$refs.signaturePad[id].undoSignature();
     },
@@ -380,14 +377,12 @@ export default {
       this.setSignature({'data': data, 'id': id});
      alert('Signature saved successfully!');
     },
-    
     showPad(index)
     {
       $('#pre-img-'+index).hide();
       $('#signature-pad-'+index).show();
       this.$refs.signaturePad[index].resizeCanvas();
     },
-    
   },
 };
 </script>

@@ -21,13 +21,12 @@
               <bootstrap-alert />
 
               <div class="box-body row">
-                
                   <div class="form-group col-md-6">
                     <input
                       type="text"
                       class="form-control"
                       name="pic"
-                      placeholder="PIC"
+                      placeholder="PIC*"
                       required
                       value=""
                       @input="updatePic"
@@ -40,12 +39,11 @@
                           type="text"
                           class="form-control"
                           name="phone"
-                          placeholder="Phone"
+                          placeholder="Phone Number*"
                           @input="updatePhone"
                           required
                         />
                       </div>
-                      
                     </div>
                   </div>
                   <div class="form-group col-md-6">
@@ -53,44 +51,35 @@
                       type="text"
                       class="form-control"
                       name="sse"
-                      placeholder="SSE"
+                      placeholder="SSE*"
                       value=""
                       @input="updateSse"
                       required
                     />
                   </div>
                   <div class="form-group col-md-6">
-                    <v-select
-                    name="role"
-                    label="title"
-                    placeholder="Mentor"
-                    class="form-control"
-                    @input="updateMentor"
-                    :value="item.mentor"
-                    :options="usersAll"
-                    />
-                    <!-- <input
-                      type="text"
-                      class="form-control"
-                      name="mentor"
-                      placeholder="Mentor"
-                      value=""
-                      @input="updateMentor"
-                      required
-                    /> -->
+					<v-select
+					name="role"
+					label="title"
+					placeholder="Select User*"
+					class="form-control"
+					@input="updateMentor"
+					:value="item.mentor"
+					:options="usersAll"
+					required
+					></v-select>
                   </div>
 
                   <div class="col-md-12">
                     <h3 class="main-heading">Job Steps</h3>
                   </div>
-                  
 
                   <div class="parent-div" v-for="(jobstep, index) in jobsteps" v-bind:key="jobstep.index">
                     <div class="col-md-10">
                       <h4 class="sub-heading">Job steps #{{ jinc = index+1}}</h4>
                     </div>
-                    <div class="main-div"> 
-                      <div class="job-step"> 
+                    <div class="main-div">
+                      <div class="job-step">
                         <div class="col-md-6">
                           <input
                             type="text"
@@ -113,7 +102,7 @@
 
                       </div>
                       <a @click="deleteSection(index)" class="delete-btn"><i class="fa fa-trash"></i></a>
-                    </div> 
+                    </div>
 
                     <div class="haz-con">
                       <h5 style="clear:both;">Hazards and Controls</h5>
@@ -141,7 +130,6 @@
                         <div class="col-md-2"><a @click="deleteAddition({'jbid': index, 'adid':additional.uid})" class="delete-btn"><i class="fa fa-trash"></i></a></div> 
                       </div>
 
-                      
                     </div>
                     <a class="btn btn-dark mt-2 mb-2" @click="addNewItem(index)" style="margin-left:15px">
                       New Item
@@ -149,7 +137,6 @@
 
                   </div>
 
-                  
                   <div class="col-md-12">
                     <a class="btn btn-secondary mt-2 mb-2" @click="addNewSection">
                       New Section
@@ -187,12 +174,11 @@
                       value=""
                       @input="updateAttachments"
                     />
-                  </div>  
+                  </div>
                   <div class="col-md-12">
                     <h3 class="main-heading">Signatures</h3>
                   </div>
                   <div class="col-md-12 signature-col" v-for="(sign, index) in signs" v-bind:key="sign.uid">
-                    
                     <div class="row">
                         <div class="col-md-3"></div>
                         <div class="col-md-5">
@@ -200,7 +186,6 @@
                           <VueSignaturePad width="500px" height="250px" style="border: 2px solid #aaa; margin-bottom: 15px;" ref="signaturePad" />
                           <input type="text" class="form-control" placeholder="Type Name" v-model="sign.type_name" value="" style="margin-bottom:10px;">
                           <div class="btn-group-cstm">
-                            
                             <a class="btn btn-secondary" @click="save(index)">Save</a>
                             <a class="btn btn-default ml-2" @click="undo(index)">Undo</a>
                             <input type="hidden" :id="'sign-pic-'+index" name="sign_pic[]" v-model="sign.signature">
@@ -212,7 +197,6 @@
                       <div class="col-md-3"></div>
 
                     </div>
-                    
                   </div>
 
                   <div class="col-md-12">
@@ -220,28 +204,18 @@
                       New Sign
                     </a>
                   </div>
-                  
-                  <div class="box-body col-md-6">                  
+                  <div class="box-body col-md-6">
                     <button type="submit" class="btn btn-primary btn-sm ml-auto" :isLoading="loading" :disabled="loading" @click="handleShowMap"
                     >
                     <span v-if="isCreate">Create Project</span>
                     <span v-else>Save</span>
                     </button>
                   </div>
-
-                
-                
               </div>
-
-              
-
             </div>
           </form>
         </div>
       </div>
-
-
-
     </section>
   </section>
 </template>
@@ -253,14 +227,10 @@ import { mapMultiRowFields } from 'vuex-map-fields'
 
 export default {
   data(){
-
    return{
      project_id: this.$route.params.id,
-     
     };
   },
-
-
 
   computed: {
     ...mapGetters('ProjectsSafetyCreate', ['item', 'loading', 'usersAll']),
@@ -272,6 +242,12 @@ export default {
   created() {
         this.fetchusersAll()
     },
+  updated(){
+		$('.v-select input').prop('required', true)
+		if ($('.selected-tag').length > 0){
+			$('.v-select input').prop('required', false)
+		}
+  },
   methods: {
     ...mapMutations('ProjectsSafetyCreate',['addNewSection','addNewItem', 'addNewSign', 'deleteSignature', 'deleteSection' , 'deleteAddition']),
     ...mapActions('ProjectsSafetyCreate', [
@@ -326,8 +302,6 @@ export default {
     updateAttachments(e) {
       this.setAttachments(e.target.value)
     },
-    
-    
     submitForm() {
         this.setProjectID(this.$route.params.id);
         this.storeData()
@@ -349,7 +323,6 @@ export default {
         return true;
       }
     },
-    
     undo(id) {
       this.$refs.signaturePad[id].undoSignature();
     },
@@ -360,8 +333,6 @@ export default {
       this.setSignature({'data': data, 'id': id});
       alert('Signature saved successfully!');
     },
-    
-    
   },
 };
 
