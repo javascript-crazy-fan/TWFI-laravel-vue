@@ -53,7 +53,6 @@ export default {
       endDate: this.getWeekDate()[1],
     })
   },
-  
   destroyed() {
     this.resetState()
   },

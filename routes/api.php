@@ -37,5 +37,6 @@ Route::group(['prefix' => '/v1', 'middleware' => ['auth'], 'namespace' => 'Api\V
 	Route::post('timecards/get-checkins-data', 'TimecardController@getCheckinsData');
 	Route::get('timecards/delete-checkin/{id}', 'TimecardController@deleteCheckin');
 
+
 	Route::apiResource('timecards', 'TimecardController');
 });

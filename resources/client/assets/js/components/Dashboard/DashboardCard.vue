@@ -69,9 +69,15 @@
         </div>
 
       </router-link> -->
-	  <a class="icon" :href="`/admin/projects/${project.id}/reports/time`">
+	  <!-- <a class="icon" :href="`/admin/projects/${project.id}/reports/time`">
 	  	<i class="fa fa-clock-o fa-2x" aria-hidden="true"></i>
-	  </a>
+	  </a> -->
+	  <router-link
+		:to="{ name: 'projects.time', params: { id: project.id, users: project.users } }"
+		class="icon"
+      >
+	  	<i class="fa fa-clock-o fa-2x" aria-hidden="true"></i>
+	  </router-link>
       <!-- <router-link to="project.photo.index" class="icon">
         <i class="fa fa-file-image-o fa-2x" aria-hidden="true"></i>
 

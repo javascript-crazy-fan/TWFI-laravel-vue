@@ -30,16 +30,20 @@
 					<div class="row">
 						<div class="form-group col-md-6">
 							<label>Select User</label>
-							<v-select
+							<select
 								v-model="selectedUser"
 								name="role"
 								label="title"
 								placeholder="Select User"
 								class="form-control user-select"
-								@input="updateMentor"
-								:value="item.mentor"
-								:options="usersAll"
-							/>
+							>
+								<option
+									v-for="users in this.$route.params.users"
+									v-bind:key="users.first_name"
+								>
+									{{users.first_name}}
+								</option>
+							</select>
 						</div>
 					</div>
 					<div class="row" v-show="!isAbsent">
@@ -123,7 +127,7 @@
 	var duration = 0;
 
 	export default {
-		props: ["data", "checkins"],
+		props: ["data", "project", "checkins"],
 		data() {
 			return {
 				// modal
@@ -164,12 +168,14 @@
 				checkinDate: "",
 				title: "",
 				selectedUser: "",
+				assignedUsers: "",
 			};
 		},
 		computed: {
 			...mapGetters("Alert", ["message", "errors", "color"]),
 			...mapGetters("TimecardsIndex", ["weekData", "checkinsData", "offsetWeek"]),
 			...mapGetters('ProjectsSafetyCreate', ['item', 'loading', 'usersAll']),
+			...mapGetters('ProjectsSingle', ['assignedUserList']),
 		},
 		beforeCreate() {},
 		created() {
@@ -249,7 +255,9 @@
 					}
 					startTimer();
 				}, 1000);
-			}
+			};
+
+			this.assignedUsers = this.$route.params.users;
 		},
 		destroyed() {
 			this.resetState();
@@ -269,6 +277,7 @@
 				'setMentor',
 				'setProjecID',
 			]),
+			...mapActions('ProjectsSingle', ['fetchAssignedUserList']),
 			handleTimecard: function (e) {
 				e.preventDefault();
 
@@ -279,10 +288,10 @@
 				this.isEntryModalVisible = true;
 			},
 			submitEntry() {
-				let today = new Date().toISOString().slice(0, 10);
+				let today = new Date().toLocaleDateString('en-CA');
 				this.newAddEntry({
 					isUpdate: false,
-					userId: this.selectedUser.id,
+					userId: this.selectedUser,
 					projectId: this.$route.params.id,
 					checkin: checkIn,
 					checkout: checkOut,
