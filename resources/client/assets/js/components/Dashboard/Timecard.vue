@@ -47,8 +47,8 @@
             <button class="btn week-prev-btn" @click="gotoPrevWeek">
               <span class="week-prev"></span>
             </button>
-            <!-- <div class="timecard-datepicker">{{getWeekDate()[0]}} ~ {{getWeekDate()[1]}}</div> -->
-            <div class="timecard-datepicker">{{ getWeekLabel(offsetWeek) }}</div>
+            <div class="timecard-datepicker">{{getWeekDate()[0]}} ~ {{getWeekDate()[1]}}</div>
+            <!-- <div class="timecard-datepicker">{{ getWeekLabel(offsetWeek) }}</div> -->
             <button class="btn week-next-btn" @click="gotoNextWeek">
               <span class="week-next"></span>
             </button>
@@ -658,7 +658,8 @@ export default {
     // const weekStart = currentDate.clone().startOf("isoWeek");
     // const weekEnd = currentDate.clone().endOf("isoWeek");
       const weekStart = moment().day("Monday").week(moment().week() + this.offsetWeek).format("YYYY-MM-DD");
-      const weekEnd = moment().day("Sunday").week(moment().week() + this.offsetWeek).format("YYYY-MM-DD");
+      const weekEnd = moment(weekStart).add(6, 'days').format("YYYY-MM-DD");
+    //   const weekEnd = moment().day("Sunday").week(moment().week() + this.offsetWeek).format("YYYY-MM-DD");
       return [weekStart, weekEnd];
     },
     showModal() {

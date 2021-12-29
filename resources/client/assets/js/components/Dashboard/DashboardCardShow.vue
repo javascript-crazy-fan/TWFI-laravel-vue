@@ -4,12 +4,12 @@
         <back-buttton></back-buttton>
     </div>
     <div class="show-page">
-      <div class="sub-section">
+      <!-- <div class="sub-section">
         <div class="sub-heading">
           <i class="fa fa-file-image-o fa-2x" style="display: flex;"><h3 style="margin-left: 10px;">Photos</h3></i>
         </div>
         <div class="sub-content"></div>
-      </div>
+      </div> -->
       <hr>
       <div class="sub-section">
         <div class="sub-heading">

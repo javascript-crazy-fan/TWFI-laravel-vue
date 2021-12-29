@@ -142,10 +142,10 @@ class TimecardController extends Controller
 	public function newAddEntry()
 	{
 		$data = request()->all();
-		$first_name = $data['userId'];
-		$user_id = User::where("first_name", $first_name)->first()->id;
+		// $first_name = $data['userId'];
+		// $user_id = User::where("first_name", $first_name)->first()->id;
 		$entry = [
-			'user_id' => $user_id,
+			'user_id' => $data['userId'],
 			'project_id' => $data['projectId'],
 			'cost_code' => $data['entryCostCode'],
 			'time_type' => $data['entryTimeType'],

@@ -20,19 +20,14 @@ export default {
     },
     methods: {
         pdfData(id) {
-            
-                
             this.$store.dispatch(
                 this.xprops.module + '/pdfData',
                 id
             )
-                
-        
         }
     }
 }
 </script>
-
 
 <style scoped>
 

@@ -39,9 +39,11 @@
 							>
 								<option
 									v-for="users in this.$route.params.users"
-									v-bind:key="users.first_name"
+									v-bind:key="users.user_id"
+									v-bind:value="users.user_id"
 								>
-									{{users.first_name}}
+									{{users.first_name}} {{users.last_name}}
+									<!-- {{users}} -->
 								</option>
 							</select>
 						</div>
@@ -288,6 +290,7 @@
 				this.isEntryModalVisible = true;
 			},
 			submitEntry() {
+				console.log("AAA", this.selectedUser);
 				let today = new Date().toLocaleDateString('en-CA');
 				this.newAddEntry({
 					isUpdate: false,

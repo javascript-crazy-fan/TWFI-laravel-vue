@@ -8,7 +8,8 @@ use App\Models\Project;
 use App\Models\Safety;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -155,6 +156,7 @@ class ProjectController extends Controller
       `projects`.`end_date`,
       `users`.`id` `user_id`,
       `users`.`first_name`,
+      `users`.`last_name`,
       `users`.`avatar`
     FROM
       `projects`
@@ -181,7 +183,9 @@ class ProjectController extends Controller
 				}
 				array_push($retData[$i]['users'], [
 					'id' => $row->id,
+					'user_id' => $row->user_id,
 					'first_name' => $row->first_name,
+					'last_name' => $row->last_name,
 					'avatar' => $row->avatar
 				]);
 			} else {
@@ -201,7 +205,9 @@ class ProjectController extends Controller
 				if ($row->user_id != null) {
 					array_push($row1['users'], [
 						'id' => $row->user_id,
+						'user_id' => $row->user_id,
 						'first_name' => $row->first_name,
+						'last_name' => $row->last_name,
 						'avatar' => $row->avatar
 					]);
 				}
